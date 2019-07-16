@@ -3,27 +3,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
-const os = require('os');
-
-const INTERNAL_SERVER_PORT = 8222;
-const ips = getLocalIps();
-const IP = ips.length ? ips[0] : '127.0.0.1'
-const INTERNAL_SERVER_HOST = `http://${IP}:${INTERNAL_SERVER_PORT}`;
-
-function getLocalIps() {
-  var os = require('os');
-  var interfaces = os.networkInterfaces();
-  var addresses = [];
-  for (var k in interfaces) {
-    for (var k2 in interfaces[k]) {
-      var address = interfaces[k][k2];
-      if (address.family === 'IPv4' && !address.internal) {
-        addresses.push(address.address);
-      }
-    }
-  }
-  return addresses;
-}
 
 module.exports = {
   dev: {
@@ -32,16 +11,15 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-        target: process.env.NODE_ENV == 'production' ? 'http://api.huangfahui.com' : INTERNAL_SERVER_HOST,
-        //target: 'https://api.xiaohuochai.cc',
+        target:'https://api.xiaohuochai.cc',
         changeOrigin:true,
         pathRewrite:{'^/api':''}
       }
     },
 
     // Various Dev Server settings
-    host: "localhost", // can be overwritten by process.env.HOST
-    port: INTERNAL_SERVER_PORT, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: 'localhost', // can be overwritten by process.env.HOST
+    port: 8888, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
@@ -50,7 +28,7 @@ module.exports = {
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.
-    useEslint: false,
+    useEslint: true,
     // If true, eslint errors and warnings will also be shown in the error overlay
     // in the browser.
     showEslintErrorsInOverlay: false,

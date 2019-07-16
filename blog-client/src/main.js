@@ -1,19 +1,28 @@
-import Vue from "vue"
+import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
-import createRouter from "./router"
-import createStore from "./store"
+import App from './App'
+import createRouter from './router'
+import createStore from './store'
+import async from './utils/async'
 
-import "./assets/styles/base.sass";
-import App from "./App.vue";
-
+Vue.use(async)
 Vue.use(VueLazyload, {
   loading: require('./assets/imgs/loading.gif'),
-  error: require('./assets/imgs/error.png')
+  listenEvents: ['scroll'],
+  filter: {
+    webp(listener, options) {
+      if (!options.supportWebp) return
+      const isCDN = /xiaohuochai.site/
+      if (isCDN.test(listener.src)) {
+        listener.src += '?imageView2/2/format/webp'
+      }
+    }
+  }
 })
 
 export default function createApp() {
-  const router = new createRouter();
-  const store = new createStore();
+  const router = createRouter()
+  const store = createStore()
   const app = new Vue({
     router,
     store,

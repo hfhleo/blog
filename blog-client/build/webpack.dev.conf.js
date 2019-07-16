@@ -13,8 +13,6 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-const mock = require('../src/mock');
-
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
   module: {
@@ -45,9 +43,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
-    },
-    setup: function (app) {
-      app.use('/api/mock/*', mock);
     }
   },
   plugins: [

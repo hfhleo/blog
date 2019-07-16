@@ -19,7 +19,7 @@ Vue.mixin({
 const { app, router, store } = createApp()
 
 /* 获得初始数据 */
-/* import { LOAD_CATEGORIES_ASYNC } from '@/components/Category/module'
+import { LOAD_CATEGORIES_ASYNC } from '@/components/Category/module'
 import { LOAD_POSTS_ASYNC } from '@/components/Post/module'
 import { LOAD_LIKES_ASYNC } from '@/components/Like/module'
 import { LOAD_COMMENTS_ASYNC } from '@/components/Comment/module'
@@ -37,7 +37,7 @@ import { LOAD_USERS_ASYNC } from '@/components/User/module'
   !commentCount && dispatch(LOAD_COMMENTS_ASYNC),
   // 获取用户信息
   !userCount && dispatch(LOAD_USERS_ASYNC)
-})() */
+})()
 
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__)
